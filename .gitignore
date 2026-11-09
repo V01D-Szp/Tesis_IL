@@ -1,0 +1,36 @@
+# Entornos de Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Variables locales (en el repositorio solo va .env.example)
+.env
+.env.*
+!.env.example
+
+# Configuración personal de editores
+.zed/
+.vscode/
+.idea/
+
+# Datos: se descargan desde su fuente oficial o se publican aparte
+dataset/pruebas/*
+dataset/propios/*
+dataset/cache/*
+!dataset/*/.gitkeep
+
+# Resultados de entrenamiento y evaluación
+outputs/
+wandb/
+
+# Pesos de modelos y archivos pesados
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.mp4
+
+# Sistema
+.DS_Store
+*.swp
+*~
