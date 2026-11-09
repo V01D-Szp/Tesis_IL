@@ -4,6 +4,8 @@ Caso de estudio con objetos estipulados por el estándar Yale-CMU-Berkeley (YCB)
 
 Universidad Santo Tomás · Facultad de Ingeniería Electrónica · Grupo de Estudio y Desarrollo en Robótica (GED)
 
+**Bitácora de avances:** [v01d-szp.github.io/Tesis_IL](https://v01d-szp.github.io/Tesis_IL/)
+
 ## Descripción
 
 Este repositorio reúne el código, la configuración y la documentación empleados para desarrollar y evaluar una estrategia de control basada en Aprendizaje por Imitación (IL, *Imitation Learning*) para el agarre y desplazamiento de objetos del estándar YCB mediante una mano robótica multidedo.
@@ -32,7 +34,7 @@ Tesis_IL/
 │   ├── pruebas/       Datasets públicos de referencia (no versionados)
 │   ├── propios/       Demostraciones recolectadas (no versionadas)
 │   └── cache/         Archivos temporales de descarga (no versionados)
-└── docs/              Documentación técnica del protocolo experimental
+└── docs/              Página de seguimiento del proyecto (bitácora de avances)
 ```
 
 Cada componente con código es un proyecto de Python independiente, con su propio entorno y versiones fijadas, para evitar conflictos de dependencias entre ellos. Los componentes intercambian información únicamente a través de `dataset/`.
