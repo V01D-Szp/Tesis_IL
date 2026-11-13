@@ -68,6 +68,7 @@ En el archivo `.env` de cada componente se ajustan las rutas absolutas según la
 | Variable | Función |
 |---|---|
 | `HF_HOME` | Caché de Hugging Face dentro de `dataset/cache/` |
+| `TORCH_HOME` | Caché de modelos preentrenados de PyTorch dentro de `dataset/cache/` |
 | `HF_LEROBOT_HOME` | Ubicación de los datasets en formato LeRobotDataset |
 | `HF_HUB_DISABLE_TELEMETRY` | Desactiva el envío de datos de uso |
 | `WANDB_MODE` | Desactiva el registro de métricas en servicios externos |

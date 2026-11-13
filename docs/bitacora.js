@@ -151,5 +151,52 @@ const SEMANAS = [
         ]
       }
     ]
+  },
+  {
+    id: "2026-11-09",
+    fechas: "9 – 13 de noviembre",
+    titulo: "Repositorio del proyecto y viabilidad técnica del entrenamiento",
+    resumen: "Publicación del repositorio y de la bitácora web, integración del entorno de entrenamiento y prueba de viabilidad técnica con Diffusion Policy.",
+    cumplimiento: "Cumple plenamente",
+    introduccion: "Publicación del repositorio del proyecto, integración del entorno de entrenamiento y prueba de viabilidad técnica del entrenamiento antes de aplicarlo a las demostraciones de teleoperación.",
+    actividades: [
+      "Publicación del repositorio del proyecto con la estructura de componentes de entrenamiento, teleoperación y datos, y la documentación para instalar y reproducir el entorno.",
+      "Integración al repositorio del entorno de entrenamiento, con las versiones de cada dependencia fijadas, y de los scripts de descarga y análisis de datasets.",
+      "Publicación de la bitácora de avances del proyecto como página web, con las actividades y evidencias de cada semana.",
+      "Prueba de viabilidad técnica del entrenamiento de Diffusion Policy con el dataset público PushT, para verificar el proceso completo antes de aplicarlo a las demostraciones de teleoperación; el error de entrenamiento se redujo de 1,091 a 0,089 y se estimaron los recursos de cómputo necesarios."
+    ],
+    resultados: [
+      "El proceso de entrenamiento funcionó de principio a fin: carga de las 206 demostraciones del dataset, entrenamiento con aceleración por GPU, reducción sostenida del error y guardado del modelo. La reducción del error confirma que el aprendizaje funciona; el desempeño de la política en la tarea se evaluará en simulación después de un entrenamiento completo.",
+      {
+        titulo: "Error de entrenamiento (200 pasos, lotes de 32 muestras)",
+        encabezados: ["Paso", "Error (loss)"],
+        filas: [
+          ["20", "1,091"], ["40", "0,865"], ["60", "0,466"], ["80", "0,222"], ["100", "0,168"],
+          ["120", "0,131"], ["140", "0,108"], ["160", "0,096"], ["180", "0,091"], ["200", "0,089"]
+        ]
+      },
+      {
+        titulo: "Recursos medidos y estimados",
+        encabezados: ["Medida", "Valor"],
+        filas: [
+          ["Parámetros del modelo", "263 millones"],
+          ["Datos recorridos", "6 400 muestras (0,25 épocas)"],
+          ["Duración de la prueba", "≈ 1 minuto"],
+          ["Velocidad de entrenamiento", "≈ 4,3 pasos por segundo"],
+          ["Memoria de GPU utilizada", "4,95 GB"],
+          ["Espacio por punto de control (checkpoint)", "3,0 GB"],
+          ["Tiempo estimado para 200 000 pasos", "≈ 13 horas"]
+        ]
+      }
+    ],
+    evidencias: [
+      {
+        items: [
+          { texto: "Repositorio del proyecto", url: "https://github.com/V01D-Szp/Tesis_IL" },
+          { texto: "Integración del entorno de entrenamiento", url: "https://github.com/V01D-Szp/Tesis_IL/commit/996ed2d" },
+          { texto: "Bitácora de avances del proyecto", url: "https://v01d-szp.github.io/Tesis_IL/" }
+        ]
+      }
+    ]
   }
 ];

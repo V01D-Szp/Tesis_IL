@@ -40,6 +40,7 @@
   function clasificar(url) {
     if (/sharepoint\.com\/:v:/.test(url)) return { clase: "video", etiqueta: "Video", icono: "play", fuente: "SharePoint institucional" };
     if (/youtube\.com|youtu\.be/.test(url)) return { clase: "youtube", etiqueta: "Video", icono: "play", fuente: "YouTube" };
+    if (/github\.io/.test(url)) return { clase: "enlace", etiqueta: "Página web", icono: "link", fuente: "GitHub Pages" };
     if (/github\.com/.test(url)) return { clase: "enlace", etiqueta: "Código", icono: "code", fuente: "GitHub" };
     if (/arxiv\.org/.test(url)) return { clase: "enlace", etiqueta: "Artículo", icono: "doc", fuente: "arXiv" };
     if (/huggingface\.co\/datasets/.test(url)) return { clase: "enlace", etiqueta: "Dataset", icono: "data", fuente: "Hugging Face" };
@@ -47,6 +48,20 @@
     if (/huggingface\.co\/docs|docs\./.test(url)) return { clase: "enlace", etiqueta: "Documentación", icono: "book", fuente: dominio(url) };
     if (/huggingface\.co/.test(url)) return { clase: "enlace", etiqueta: "Datasets", icono: "data", fuente: "Hugging Face" };
     return { clase: "enlace", etiqueta: "Enlace", icono: "link", fuente: dominio(url) };
+  }
+
+  // Un resultado puede ser un texto o una tabla { titulo, encabezados: [...], filas: [[...], ...] }
+  function bloqueResultado(r) {
+    if (typeof r === "string") return '<p class="resultado">' + formatear(r) + "</p>";
+    return '<figure class="tabla-resultado">' +
+      (r.titulo ? "<figcaption>" + formatear(r.titulo) + "</figcaption>" : "") +
+      '<div class="tabla-marco"><table><thead><tr>' +
+      r.encabezados.map(function (h) { return "<th>" + formatear(h) + "</th>"; }).join("") +
+      "</tr></thead><tbody>" +
+      r.filas.map(function (f) {
+        return "<tr>" + f.map(function (c) { return "<td>" + formatear(String(c)) + "</td>"; }).join("") + "</tr>";
+      }).join("") +
+      "</tbody></table></div></figure>";
   }
 
   function dominio(url) {
@@ -197,7 +212,7 @@
 
     const resultados = (s.resultados || []).length
       ? '<section class="bloque resultados"><h2>Resultados</h2>' +
-        s.resultados.map(function (r) { return '<p class="resultado">' + formatear(r) + "</p>"; }).join("") + "</section>"
+        s.resultados.map(bloqueResultado).join("") + "</section>"
       : "";
 
     let evidencias = "";
