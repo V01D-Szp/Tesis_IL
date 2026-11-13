@@ -1,6 +1,6 @@
 // Bitácora de avances del proyecto.
 // Para registrar una semana nueva, agregar un bloque al final de SEMANAS.
-// Campos opcionales: resultados, evidencias, medios, cumplimiento.
+// Campos opcionales: resultados, evidencias, medios.
 
 const PROYECTO = {
   titulo: "Estrategia de Aprendizaje por Imitación para la Manipulación de Objetos con una Mano Robótica Multidedo",
@@ -17,7 +17,6 @@ const SEMANAS = [
     fechas: "5 – 9 de octubre",
     titulo: "Revisión técnica del hardware e inicio del retargeting",
     resumen: "Control de brazos y manos del Unitree G1 y seguimiento de la mano del operador con MediaPipe.",
-    cumplimiento: "Cumple en alto grado",
     introduccion: "Revisión técnica y control del hardware (Unitree G1 + manos BrainCo Revo2) e inicio del retargeting hacia la mano.",
     actividades: [
       "Control por consola de codos, muñecas y hombros con el SDK de Unitree (arm_sdk), con límites de seguridad medidos en pruebas físicas (codo −120°/+40°, muñeca ±110°, hombro 110°).",
@@ -39,7 +38,6 @@ const SEMANAS = [
     fechas: "12 – 16 de octubre",
     titulo: "Herramientas de software para el Aprendizaje por Imitación",
     resumen: "Selección del entrenamiento, los modelos de control, los datasets de prueba, la simulación y la teleoperación.",
-    cumplimiento: "Cumple plenamente",
     introduccion: "Revisión de las herramientas de software para entrenar el sistema por Aprendizaje por Imitación (IL) y para recolectar las demostraciones.",
     actividades: [
       "El IL entrena un modelo a partir de ejemplos de la tarea realizados por una persona (demostraciones). Se definió empezar practicando el entrenamiento con conjuntos de datos (datasets) públicos de prueba, antes de montar la simulación del robot.",
@@ -99,7 +97,6 @@ const SEMANAS = [
     fechas: "19 – 23 de octubre",
     titulo: "Entorno de entrenamiento y prueba con un dataset público",
     resumen: "Entorno aislado y reproducible con LeRobot sobre PyTorch, y análisis del dataset PushT.",
-    cumplimiento: "Cumple plenamente",
     introduccion: "Preparación del entorno de entrenamiento para el Aprendizaje por Imitación (IL) y prueba con un conjunto de datos público.",
     actividades: [
       "Configuración de un entorno de trabajo aislado y reproducible, con las versiones de cada dependencia registradas.",
@@ -134,7 +131,6 @@ const SEMANAS = [
     fechas: "2 – 6 de noviembre",
     titulo: "Teleoperación en simulación, límites y criterios de éxito",
     resumen: "Teleoperación del brazo y la mano del G1 en MuJoCo, registro automático de demostraciones y criterios de éxito.",
-    cumplimiento: "Cumple plenamente",
     introduccion: "Teleoperación del brazo derecho y la mano del Unitree G1 en simulación física (MuJoCo), con el robot sentado frente a una mesa, y definición de los límites del sistema y de los criterios de éxito.",
     actividades: [
       "Modelo oficial del G1 con la mano Revo2 importada desde su archivo URDF; robot sentado y fijo, mesa con una zona de inicio (azul) y una zona objetivo (verde), y objetos con las medidas y masas reales del estándar YCB (lata, pelota, cubo y banano).",
@@ -157,7 +153,6 @@ const SEMANAS = [
     fechas: "9 – 13 de noviembre",
     titulo: "Repositorio del proyecto y viabilidad técnica del entrenamiento",
     resumen: "Publicación del repositorio y de la bitácora web, integración del entorno de entrenamiento y prueba de viabilidad técnica con Diffusion Policy.",
-    cumplimiento: "Cumple plenamente",
     introduccion: "Publicación del repositorio del proyecto, integración del entorno de entrenamiento y prueba de viabilidad técnica del entrenamiento antes de aplicarlo a las demostraciones de teleoperación.",
     actividades: [
       "Publicación del repositorio del proyecto con la estructura de componentes de entrenamiento, teleoperación y datos, y la documentación para instalar y reproducir el entorno.",

@@ -267,19 +267,6 @@ a.tarjeta:hover { transform: translateY(-2px); border-color: var(--azul-300); bo
 }
 .ver .icono { width: 16px; height: 16px; }
 
-.insignia {
-  display: inline-block;
-  font-size: .76rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 999px;
-  color: var(--texto);
-  border: 1px solid transparent;
-}
-.insignia.pleno { background: var(--azul-200); }
-.insignia.alto { background: var(--azul-100); }
-.insignia.parcial { background: var(--azul-50); border-color: var(--azul-200); }
-.insignia.no { background: var(--blanco); border-color: var(--azul-300); }
 
 /* ---------- Detalle de la semana ---------- */
 .detalle { padding: 28px 20px 30px; }

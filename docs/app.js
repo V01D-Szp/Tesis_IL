@@ -76,19 +76,6 @@
     return m ? m[1] : null;
   }
 
-  function claseCumplimiento(valor) {
-    if (!valor) return "";
-    if (/plenamente/i.test(valor)) return "pleno";
-    if (/alto grado/i.test(valor)) return "alto";
-    if (/parcialmente/i.test(valor)) return "parcial";
-    return "no";
-  }
-
-  function insigniaCumplimiento(valor) {
-    if (!valor) return "";
-    return '<span class="insignia ' + claseCumplimiento(valor) + '">' + escapar(valor) + "</span>";
-  }
-
   function contarEvidencias(semana) {
     let enlaces = 0, videos = 0;
     (semana.evidencias || []).forEach(function (g) {
@@ -140,7 +127,7 @@
       const hito = s.tipo === "hito";
       const meta = hito ? "" : contarEvidencias(s);
       const contenido =
-        '<div class="tarjeta-cabecera"><span class="fechas">' + escapar(s.fechas) + "</span>" + insigniaCumplimiento(s.cumplimiento) + "</div>" +
+        '<div class="tarjeta-cabecera"><span class="fechas">' + escapar(s.fechas) + "</span>" + "</div>" +
         "<h3>" + (hito ? icono("flag", "icono hito-icono") : "") + escapar(s.titulo) + "</h3>" +
         "<p>" + escapar(s.resumen) + "</p>" +
         (hito ? "" : '<div class="tarjeta-pie"><span class="meta">' + escapar(meta) + '</span><span class="ver">Ver detalle' + icono("arrowR") + "</span></div>");
@@ -240,7 +227,7 @@
     raiz.innerHTML = encabezado(true) +
       '<main class="contenedor detalle">' +
       '<a class="volver" href="index.html">' + icono("arrowL") + "Bitácora de avances</a>" +
-      '<div class="detalle-cabecera"><span class="fechas">' + escapar(s.fechas) + "</span>" + insigniaCumplimiento(s.cumplimiento) + "</div>" +
+      '<div class="detalle-cabecera"><span class="fechas">' + escapar(s.fechas) + "</span>" + "</div>" +
       "<h1>" + escapar(s.titulo) + "</h1>" +
       '<p class="introduccion">' + formatear(s.introduccion) + "</p>" +
       actividades + resultados + evidencias + bloqueMedios(s.medios) + navegacion +
