@@ -38,6 +38,7 @@
   }
 
   function clasificar(url) {
+    if (!/^https?:/.test(url)) return { clase: "enlace", etiqueta: /\.json$/.test(url) ? "Datos" : "Archivo", icono: "data", fuente: "Archivo de la bitácora" };
     if (/sharepoint\.com\/:v:/.test(url)) return { clase: "video", etiqueta: "Video", icono: "play", fuente: "SharePoint institucional" };
     if (/youtube\.com|youtu\.be/.test(url)) return { clase: "youtube", etiqueta: "Video", icono: "play", fuente: "YouTube" };
     if (/github\.io/.test(url)) return { clase: "enlace", etiqueta: "Página web", icono: "link", fuente: "GitHub Pages" };
@@ -46,13 +47,16 @@
     if (/huggingface\.co\/datasets/.test(url)) return { clase: "enlace", etiqueta: "Dataset", icono: "data", fuente: "Hugging Face" };
     if (/huggingface\.co\/spaces/.test(url)) return { clase: "enlace", etiqueta: "Visualizador", icono: "eye", fuente: "Hugging Face" };
     if (/huggingface\.co\/docs|docs\./.test(url)) return { clase: "enlace", etiqueta: "Documentación", icono: "book", fuente: dominio(url) };
+    if (/huggingface\.co\/[^/]+\/[^/?#]+/.test(url)) return { clase: "enlace", etiqueta: "Modelo", icono: "data", fuente: "Hugging Face" };
     if (/huggingface\.co/.test(url)) return { clase: "enlace", etiqueta: "Datasets", icono: "data", fuente: "Hugging Face" };
     return { clase: "enlace", etiqueta: "Enlace", icono: "link", fuente: dominio(url) };
   }
 
-  // Un resultado puede ser un texto o una tabla { titulo, encabezados: [...], filas: [[...], ...] }
+  // Un resultado puede ser un texto, una interpretación { lectura }
+  // o una tabla { titulo, encabezados: [...], filas: [[...], ...] }
   function bloqueResultado(r) {
     if (typeof r === "string") return '<p class="resultado">' + formatear(r) + "</p>";
+    if (r.lectura) return '<p class="lectura">' + formatear(r.lectura) + "</p>";
     return '<figure class="tabla-resultado">' +
       (r.titulo ? "<figcaption>" + formatear(r.titulo) + "</figcaption>" : "") +
       '<div class="tabla-marco"><table><thead><tr>' +
@@ -166,9 +170,10 @@
       "<strong>" + formatear(item.texto) + "</strong></span></a>";
   }
 
-  function bloqueMedios(medios) {
+  function bloqueMedios(medios, nota) {
     if (!medios || !medios.length) return "";
-    return '<section class="bloque registro"><h2>Registro visual</h2><div class="galeria">' +
+    return '<section class="bloque registro"><h2>Registro visual</h2>' +
+      (nota ? '<p class="nota-medios">' + formatear(nota) + "</p>" : "") + '<div class="galeria">' +
       medios.map(function (m) {
         const pie = m.descripcion ? "<figcaption>" + escapar(m.descripcion) + "</figcaption>" : "";
         if (m.tipo === "video") {
@@ -230,7 +235,7 @@
       '<div class="detalle-cabecera"><span class="fechas">' + escapar(s.fechas) + "</span>" + "</div>" +
       "<h1>" + escapar(s.titulo) + "</h1>" +
       '<p class="introduccion">' + formatear(s.introduccion) + "</p>" +
-      actividades + resultados + evidencias + bloqueMedios(s.medios) + navegacion +
+      actividades + resultados + bloqueMedios(s.medios, s.notaMedios) + evidencias + navegacion +
       "</main>" + pie();
   }
 

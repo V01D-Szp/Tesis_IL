@@ -34,3 +34,4 @@ wandb/
 .DS_Store
 *.swp
 *~
+!docs/evidencias/**/*.mp4

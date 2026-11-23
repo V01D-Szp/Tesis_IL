@@ -1,6 +1,6 @@
 // Bitácora de avances del proyecto.
 // Para registrar una semana nueva, agregar un bloque al final de SEMANAS.
-// Campos opcionales: resultados, evidencias, medios.
+// Campos opcionales: resultados, evidencias, medios, notaMedios.
 
 const PROYECTO = {
   titulo: "Estrategia de Aprendizaje por Imitación para la Manipulación de Objetos con una Mano Robótica Multidedo",
@@ -192,6 +192,89 @@ const SEMANAS = [
           { texto: "Bitácora de avances del proyecto", url: "https://v01d-szp.github.io/Tesis_IL/" }
         ]
       }
+    ]
+  },
+  {
+    id: "2026-11-16",
+    fechas: "16 – 20 de noviembre",
+    titulo: "Viabilidad de ACT y evaluación de las políticas en simulación",
+    resumen: "Entrenamiento de prueba de ACT, evaluación en simulación de ACT y Diffusion Policy con tasa de éxito, e implementación del cálculo con intervalo de Wilson.",
+    introduccion: "Validación del entrenamiento de las dos políticas seleccionadas y del proceso de evaluación que se aplicará a las demostraciones de teleoperación.",
+    actividades: [
+      "Prueba de viabilidad técnica del entrenamiento de ACT con el dataset público ALOHA (transferencia de un cubo entre dos brazos); el error de entrenamiento se redujo de 28,19 a 3,64 y se compararon los recursos de cómputo con Diffusion Policy.",
+      "Evaluación en simulación del desempeño de las dos políticas seleccionadas en sus tareas de referencia, con modelos publicados por LeRobot adaptados a la versión del entorno, para validar el proceso de evaluación que se aplicará a las demostraciones de teleoperación: ACT alcanzó 72 % de éxito en ALOHA (36 de 50 episodios) y Diffusion Policy 58 % en PushT (29 de 50).",
+      "Implementación del cálculo de la tasa de éxito con intervalo de confianza de Wilson al 95 % y de la clasificación de fallos por etapa alcanzada, validado con los resultados de la evaluación."
+    ],
+    resultados: [
+      "Se validó el entrenamiento de las dos políticas seleccionadas y el proceso de evaluación que se aplicará a las políticas entrenadas con las demostraciones de teleoperación.",
+      {
+        titulo: "Viabilidad técnica del entrenamiento (prueba de 200 pasos)",
+        encabezados: ["Medida", "ACT (ALOHA)", "Diffusion Policy (PushT)"],
+        filas: [
+          ["Demostraciones del dataset", "50", "206"],
+          ["Parámetros del modelo", "52 millones", "263 millones"],
+          ["Velocidad de entrenamiento", "≈ 7,5 pasos/s (lotes de 8)", "≈ 4,3 pasos/s (lotes de 32)"],
+          ["Memoria de GPU utilizada", "2,1 GB", "4,95 GB"],
+          ["Espacio por punto de control (checkpoint)", "0,59 GB", "3,0 GB"],
+          ["Error de entrenamiento (paso 20 → paso 200)", "28,19 → 3,64", "1,091 → 0,089"],
+          ["Tiempo estimado de un entrenamiento completo", "≈ 3,5–4 h (100 000 pasos)", "≈ 13 h (200 000 pasos)"]
+        ]
+      },
+      { lectura: "Ambas políticas caben en el equipo de entrenamiento. ACT, política principal del proyecto, requiere cerca de una quinta parte de los parámetros y del almacenamiento de Diffusion Policy. Los valores de error no son comparables entre políticas, ya que cada una lo calcula de forma distinta." },
+      {
+        titulo: "Tasa de éxito en simulación (50 episodios por política)",
+        encabezados: ["Política", "Tarea", "Éxitos", "Tasa de éxito", "Intervalo de Wilson (95 %)"],
+        filas: [
+          ["ACT", "ALOHA, transferencia de un cubo entre dos brazos", "36 de 50", "72 %", "58,3 % – 82,5 %"],
+          ["Diffusion Policy", "PushT, desplazamiento de una pieza en T hasta el objetivo", "29 de 50", "58 %", "44,2 % – 70,6 %"]
+        ]
+      },
+      { lectura: "El intervalo de Wilson indica el rango que contiene la tasa de éxito real con un 95 % de confianza. Al tratarse de tareas distintas, estas tasas no permiten comparar las políticas entre sí; dicha comparación se realizará con las demostraciones y escenarios propios del proyecto." },
+      {
+        titulo: "Clasificación de los fallos de ACT según la etapa alcanzada",
+        encabezados: ["Etapa máxima alcanzada", "Descripción", "Fallos", "Categoría del protocolo"],
+        filas: [
+          ["0", "La pinza no alcanzó el cubo", "1", "No llegada"],
+          ["1", "La pinza tocó el cubo sin separarlo de la mesa", "3", "Fallo de agarre"],
+          ["2", "El cubo se separó de la mesa, al menos de forma momentánea, sin completarse la transferencia", "10", "Fallo de agarre o durante el traslado"]
+        ]
+      },
+      { lectura: "La etapa se obtiene de la recompensa que asigna el simulador. La etapa 2 incluye separaciones momentáneas del cubo respecto a la mesa, por lo que no distingue por sí sola un agarre inestable de una caída durante el traslado. Para el protocolo de la tesis se definirán criterios observables propios, como la altura mínima de levantamiento y su permanencia, que permitan esa distinción." },
+      {
+        titulo: "Precisión de la tasa de éxito según el número de intentos (intervalo de Wilson, 95 %)",
+        encabezados: ["Intentos", "Éxitos", "Tasa", "Intervalo"],
+        filas: [
+          ["20 (un objeto)", "16", "80 %", "58,4 % – 91,9 %"],
+          ["20 (un objeto)", "12", "60 %", "38,7 % – 78,1 %"],
+          ["80 (cuatro objetos de una misma condición)", "64", "80 %", "70,0 % – 87,3 %"],
+          ["80 (cuatro objetos de una misma condición)", "48", "60 %", "49,0 % – 70,0 %"]
+        ]
+      },
+      { lectura: "Con 20 intentos por objeto, los intervalos correspondientes a 80 % y 60 % se superponen, por lo que ambos resultados no pueden distinguirse estadísticamente. Al agrupar los cuatro objetos de cada condición, los intervalos se separan. Este resultado se tendrá en cuenta para definir el criterio de aceptación del protocolo experimental." }
+    ],
+    evidencias: [
+      {
+        grupo: "Datos de los resultados",
+        items: [
+          { texto: "Resumen estadístico de la evaluación de ACT", url: "evidencias/2026-11-16/resumen_act_aloha.json" },
+          { texto: "Resumen estadístico de la evaluación de Diffusion Policy", url: "evidencias/2026-11-16/resumen_diffusion_pusht.json" }
+        ]
+      },
+      {
+        grupo: "Modelos y datasets de referencia",
+        items: [
+          { texto: "Dataset ALOHA de transferencia de cubo (versión v3.0)", url: "https://huggingface.co/datasets/lerobot/aloha_sim_transfer_cube_human" },
+          { texto: "Modelo de referencia de ACT publicado por LeRobot", url: "https://huggingface.co/lerobot/act_aloha_sim_transfer_cube_human" },
+          { texto: "Modelo de referencia de Diffusion Policy publicado por LeRobot", url: "https://huggingface.co/lerobot/diffusion_pusht" }
+        ]
+      }
+    ],
+    notaMedios: "Los videos corresponden a casos representativos seleccionados entre los diez primeros episodios grabados de cada evaluación: para cada política, el intento exitoso más limpio y un intento fallido del tipo más frecuente. El desempeño de cada política se determina con la tasa de éxito sobre los 50 episodios.",
+    medios: [
+      { tipo: "video", archivo: "evidencias/2026-11-16/act_aloha_exito.mp4", descripcion: "Intento exitoso de ACT, con la transferencia del cubo entre los dos brazos (episodio 3)." },
+      { tipo: "video", archivo: "evidencias/2026-11-16/act_aloha_fallo.mp4", descripcion: "Intento fallido de ACT, en el que la pinza alcanza el cubo sin lograr levantarlo de la mesa (episodio 0)." },
+      { tipo: "video", archivo: "evidencias/2026-11-16/diffusion_pusht_exito.mp4", descripcion: "Intento exitoso de Diffusion Policy, con la pieza en T ubicada sobre el objetivo (episodio 3)." },
+      { tipo: "video", archivo: "evidencias/2026-11-16/diffusion_pusht_fallo.mp4", descripcion: "Intento fallido de Diffusion Policy, en el que la pieza queda cerca del objetivo sin alcanzar la cobertura exigida (episodio 1)." }
     ]
   }
 ];

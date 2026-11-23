@@ -1,0 +1,17 @@
+{
+  "confianza": 0.95,
+  "corridas": [
+    {
+      "corrida": "diffusion_pusht_oficial",
+      "episodios": 50,
+      "exitos": 29,
+      "tasa_exito": 0.58,
+      "ic_inferior": 0.44233441768578236,
+      "ic_superior": 0.7062499664528801,
+      "fallos_por_recompensa_max": {
+        "promedio": 0.8240102157139753
+      }
+    }
+  ],
+  "total": null
+}

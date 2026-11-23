@@ -1,0 +1,19 @@
+{
+  "confianza": 0.95,
+  "corridas": [
+    {
+      "corrida": "act_aloha_oficial",
+      "episodios": 50,
+      "exitos": 36,
+      "tasa_exito": 0.72,
+      "ic_inferior": 0.5833487630404345,
+      "ic_superior": 0.8252582933408877,
+      "fallos_por_recompensa_max": {
+        "0": 1,
+        "1": 3,
+        "2": 10
+      }
+    }
+  ],
+  "total": null
+}

@@ -450,7 +450,7 @@ a.tarjeta:hover { transform: translateY(-2px); border-color: var(--azul-300); bo
 /* Imágenes y videos propios */
 .galeria {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 14px;
 }
 .medio { margin: 0; }
@@ -551,3 +551,19 @@ a.tarjeta:hover { transform: translateY(-2px); border-color: var(--azul-300); bo
 }
 .tabla-resultado td { padding: 8px 14px; border-top: 1px solid var(--azul-50); }
 .tabla-resultado tbody tr:nth-child(even) td { background: var(--blanco-3); }
+
+/* Interpretación de un resultado */
+.lectura {
+  margin: 10px 0 0;
+  padding: 12px 16px;
+  background: var(--blanco);
+  border: 1px solid var(--azul-100);
+  border-left: 3px solid var(--azul-300);
+  border-radius: 0 10px 10px 0;
+  font-size: .94rem;
+}
+.lectura + .tabla-resultado, .lectura + .resultado { margin-top: 22px; }
+.tabla-resultado td:first-child { font-weight: 500; }
+
+.nota-medios { margin: 0 0 16px; font-size: .94rem; max-width: 75ch; }
+
